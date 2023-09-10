@@ -13,12 +13,19 @@ const Countris = () => {
 
 const handleVisittedCountris = country =>{
     console.log('add this to visited country');
-    console.log(country);
+    const newvisiteCountris = [...visiteCountris,country];
+    setvisiteCountris(newvisiteCountris);
 }
 
     return (
         <div>
             <h3 className="text-3xl font-bold text-center mt-5 mx-w-full">Countris: {countris.length}</h3>
+            <div className="">
+                <h5>countries: {visiteCountris.length}</h5>
+                {
+                visiteCountris.map(country =>  <li key={country.cca3}>{country.name.common}</li>)
+                }
+            </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
             {
                 countris.map(countr =><Country
