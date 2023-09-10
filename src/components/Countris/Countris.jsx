@@ -5,6 +5,7 @@ import Country from "./Country";
 const Countris = () => {
     const [countris, setcountris] = useState([])
     const[visiteCountris, setvisiteCountris]=useState([])
+    const[visiteCountrisflag, setvisiteCountrisflag]=useState([])
     useEffect(()=>{
         fetch('https://restcountries.com/v3.1/all')
         .then(res => res.json())
@@ -16,6 +17,10 @@ const handleVisittedCountris = country =>{
     const newvisiteCountris = [...visiteCountris,country];
     setvisiteCountris(newvisiteCountris);
 }
+const handleVisittedCountrisflag = flag =>{
+    const newvisiteCountrisflag = [...visiteCountrisflag,flag];
+    setvisiteCountrisflag(newvisiteCountrisflag);
+}
 
     return (
         <div>
@@ -26,11 +31,17 @@ const handleVisittedCountris = country =>{
                 visiteCountris.map(country =>  <li key={country.cca3}>{country.name.common}</li>)
                 }
             </div>
+            <div className=" w-[100px] h-14 flex gap-2">
+                {
+                    visiteCountrisflag.map(flag => <img src={flag}></img>)
+                }
+            </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
             {
                 countris.map(countr =><Country
                      key={countr.cca3}
                      handleVisittedCountris = {handleVisittedCountris}
+                     handleVisittedCountrisflag={handleVisittedCountrisflag}
                       country={countr}>
 
                       </Country>)
